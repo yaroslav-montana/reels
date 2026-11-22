@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рилсы делает нейросеть, курс продаёт воронка — Ярослав Монтана</title>
+<meta name="description" content="Как вести Instagram с помощью нейросетей без лица в кадре и продавать свой инфопродукт через простую воронку. Показываю схему на своём аккаунте.">
+<meta property="og:title" content="Рилсы делает нейросеть, курс продаёт воронка">
+<meta property="og:description" content="Показываю схему на своём аккаунте: ролики, бот, канал, инфопродукт.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --ink:#111;--paper:#fff8ef;--paper2:#fffdf8;--yellow:#ffd93d;--salmon:#ff8d67;
+  --cyan:#69d8f0;--pink:#ff7aa5;--red:#eb5339;--green:#7ee08a;--dark:#1a1d22;
+  --b:4px solid var(--ink);--sh:6px 6px 0 var(--ink);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Space Grotesk",system-ui,sans-serif;color:var(--ink);background:#d6d6d6;line-height:1.55;font-size:17px}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+.page{max-width:1080px;margin:16px auto;background:
+  linear-gradient(rgba(17,17,17,.06) 1px,transparent 1px) 0 0/28px 28px,
+  linear-gradient(90deg,rgba(17,17,17,.06) 1px,transparent 1px) 0 0/28px 28px,var(--paper2);
+  border:var(--b);box-shadow:10px 10px 0 var(--ink);overflow:hidden}
+.wrap{padding:0 56px}
+section{padding:64px 0}
+.mono{font-family:"Space Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:700}
+.bar{margin:28px 56px 0;background:var(--salmon);border:var(--b);box-shadow:var(--sh);text-align:center;padding:12px}
+.tag{display:inline-flex;align-items:center;gap:8px;background:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:6px 14px;font-weight:700;font-size:15px}
+.tag i{width:10px;height:10px;border-radius:50%;background:var(--red);border:2px solid var(--ink)}
+h1{font-size:clamp(40px,7.2vw,80px);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin:22px 0 26px}
+h2{font-size:clamp(28px,4.2vw,44px);line-height:1.08;letter-spacing:-.02em;font-weight:700;margin-bottom:22px}
+h3{font-size:22px;line-height:1.2;font-weight:700;margin-bottom:10px}
+.hl{background:var(--yellow);box-shadow:6px 6px 0 var(--pink);padding:0 10px;display:inline-block;transform:rotate(-1deg)}
+.mark{background:var(--yellow);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--pink);padding:2px 8px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone;line-height:2}
+.lead{font-size:20px;max-width:720px}
+p+p{margin-top:14px}
+.btn{display:inline-block;text-decoration:none;background:var(--cyan);border:var(--b);border-radius:6px;box-shadow:5px 5px 0 var(--ink),0 0 18px rgba(105,216,240,.35);padding:20px 46px;font-weight:700;font-size:21px;transition:transform .12s,box-shadow .12s;text-align:center}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+.btn.big{font-size:24px;padding:24px 56px}
+.btn-note{font-size:14px;opacity:.7;margin-top:12px}
+.center{text-align:center}
+.card{background:#fff;border:var(--b);box-shadow:var(--sh);padding:28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.label{display:inline-block;background:var(--salmon);border:var(--b);box-shadow:var(--sh);padding:14px 28px;margin-bottom:30px}
+.label.y{background:var(--yellow)}.label.c{background:var(--cyan)}.label.p{background:var(--pink)}
+.hero{display:grid;grid-template-columns:1.25fr .9fr;gap:40px;align-items:center}
+.photo{border:var(--b);box-shadow:10px 10px 0 var(--ink);background:var(--cyan);padding:10px;transform:rotate(1.5deg)}
+.photo img{border:3px solid var(--ink);width:100%;aspect-ratio:3/4;object-fit:cover}
+.stamp{position:absolute;background:var(--yellow);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:8px 12px;font-weight:700;font-size:15px;line-height:1.25}
+.clients{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.clients span{background:#fff;border:3px solid var(--ink);padding:6px 14px;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+.feat .num{font-family:"Space Mono",monospace;font-weight:700;font-size:42px;line-height:1;margin-bottom:14px}
+ul.check{list-style:none}
+ul.check li{position:relative;padding-left:34px;margin:12px 0}
+ul.check li:before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;background:var(--green);border:3px solid var(--ink)}
+ul.cross li:before{background:var(--pink)}
+ul.cross li:after{content:"×";position:absolute;left:5px;top:-3px;font-weight:700;font-size:18px}
+.dark{background:var(--dark);color:#fff8ef;border:var(--b);box-shadow:10px 10px 0 var(--ink);padding:40px}
+.dark .mark{color:var(--ink)}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.pics{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pics img{border:var(--b);box-shadow:5px 5px 0 var(--ink);aspect-ratio:3/4;object-fit:cover;width:100%}
+.pics figure:nth-child(odd){transform:rotate(-1.5deg)}.pics figure:nth-child(even){transform:rotate(1.5deg) translateY(18px)}
+figcaption{font-family:"Space Mono",monospace;font-size:12px;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+.timeline .card{padding:18px}
+.timeline b{font-family:"Space Mono",monospace;display:block;font-size:13px;margin-bottom:6px}
+.works{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.work{border:var(--b);box-shadow:5px 5px 0 var(--ink);background:#000;position:relative}
+.work video{width:100%;aspect-ratio:16/9;object-fit:cover}
+.work span{position:absolute;left:8px;bottom:8px;background:var(--yellow);border:2px solid var(--ink);font-weight:700;font-size:13px;padding:2px 8px}
+.mod{display:grid;grid-template-columns:120px 1fr;gap:26px;padding:30px 0;border-top:3px dashed rgba(17,17,17,.35)}
+.mod:first-of-type{border-top:0}
+.mod .n{background:var(--yellow);border:var(--b);box-shadow:var(--sh);height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-weight:700}
+.mod .n b{font-size:40px;line-height:1}
+.mod:nth-of-type(3n+2) .n{background:var(--cyan)}.mod:nth-of-type(3n) .n{background:var(--pink)}
+.res{background:#eaffe9;border:3px solid var(--ink);padding:12px 16px;margin-top:14px;font-weight:500}
+.res b{font-family:"Space Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;display:block}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:var(--b);box-shadow:var(--sh)}
+.split>div{padding:28px;background:#fff}
+.split>div:first-child{background:var(--cyan);border-right:var(--b)}
+.shot{border:var(--b);box-shadow:var(--sh);background:#fff;padding:10px}
+.case{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center}
+.case img{border:var(--b);box-shadow:5px 5px 0 var(--ink);aspect-ratio:1;object-fit:cover}
+.price-card{max-width:620px;margin:0 auto;background:#fff;border:var(--b);box-shadow:12px 12px 0 var(--ink);padding:40px;position:relative}
+.price-card .ribbon{position:absolute;top:-22px;left:50%;transform:translateX(-50%) rotate(-2deg);background:var(--pink);border:var(--b);box-shadow:4px 4px 0 var(--ink);padding:6px 18px;white-space:nowrap}
+.old{font-family:"Space Mono",monospace;text-decoration:line-through;opacity:.55;font-size:20px}
+.price{font-size:72px;font-weight:700;color:#f0a000;-webkit-text-stroke:2px var(--ink);letter-spacing:-.02em;line-height:1}
+.compare{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.compare .card:nth-child(3){background:var(--yellow)}
+.compare .big{font-size:34px;font-weight:700;line-height:1.1;margin:8px 0}
+details{background:#fff;border:var(--b);box-shadow:5px 5px 0 var(--ink);margin-bottom:16px}
+summary{list-style:none;cursor:pointer;padding:20px 60px 20px 24px;font-weight:700;font-size:19px;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);width:30px;height:30px;border:3px solid var(--ink);background:var(--yellow);display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-size:20px}
+details[open] summary:after{content:"−";background:var(--cyan)}
+details>div{padding:0 24px 22px}
+.chairs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.chairs .card:nth-child(1){background:#f1f1f1}
+.chairs .card:nth-child(3){background:var(--green)}
+.final{background:var(--salmon);border-top:var(--b)}
+footer{border-top:var(--b);background:var(--dark);color:#fff8ef;padding:28px 56px;font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 14px;background:rgba(255,248,239,.95);border-top:var(--b);display:none;z-index:9}
+.sticky .btn{display:block;padding:14px;font-size:18px}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.js .reveal.on{opacity:1;transform:none}
+@media (max-width:860px){
+  body{font-size:16px}
+  .page{margin:0;border-left:0;border-right:0;box-shadow:none}
+  .wrap{padding:0 20px}.bar{margin:16px 20px 0}
+  section{padding:46px 0}
+  .hero,.story,.grid2,.grid3,.compare,.chairs,.split{grid-template-columns:1fr}
+  .split>div:first-child{border-right:0;border-bottom:var(--b)}
+  .timeline{grid-template-columns:1fr 1fr}
+  .works{grid-template-columns:1fr 1fr}
+  .mod{grid-template-columns:1fr;gap:16px}.mod .n{height:auto;flex-direction:row;gap:12px;padding:10px;justify-content:flex-start}
+  .mod .n b{font-size:28px}
+  .case{grid-template-columns:1fr}.case img{max-width:220px}
+  .price{font-size:56px}.price-card{padding:34px 22px}
+  .btn{padding:18px 26px;width:100%}
+  .dark{padding:26px}
+  footer{padding:24px 20px 90px}
+  .sticky{display:block}
+}
+
+/* --- дополнения --- */
+.igrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:6px}
+.igrid div{position:relative;background:#000}
+.igrid img{width:100%;aspect-ratio:9/14;object-fit:cover}
+.igrid span{position:absolute;left:0;right:0;bottom:0;padding:22px 6px 7px 8px;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;gap:5px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.igrid svg{width:16px;height:16px;flex:none}
+section.wrap{padding-top:64px;padding-bottom:64px}
+section.final{padding:72px 0}
+h1,h2,h3{text-wrap:balance}
+ul.cross li:after{left:0;top:4px;width:18px;height:18px;line-height:17px;text-align:center;font-size:17px}
+
+h1{font-size:clamp(38px,6.2vw,68px);overflow-wrap:break-word}
+.hl{padding:0 10px 4px}
+.note{font-size:14px;opacity:.7}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+.stats .card{padding:18px}
+.stats b{display:block;font-size:30px;line-height:1.1;letter-spacing:-.02em;margin-bottom:6px}
+.stats span{display:block;font-size:15px;line-height:1.35}
+.steps{counter-reset:s}
+.step{display:grid;grid-template-columns:1fr 260px;gap:34px;align-items:center;padding:34px 0;border-top:3px dashed rgba(17,17,17,.35)}
+.step:first-child{border-top:0;padding-top:0}
+.step:nth-child(even){grid-template-columns:260px 1fr}
+.step:nth-child(even) .txt{order:2}
+.step .n{display:inline-block;background:var(--ink);color:#fff;padding:4px 12px;margin-bottom:14px}
+.step h3{font-size:clamp(24px,3vw,32px)}
+.phone{border:var(--b);box-shadow:var(--sh);background:#000;position:relative;max-width:260px;width:100%;margin:0 auto}
+.phone video{width:100%;aspect-ratio:9/16;object-fit:cover}
+.step.wide{grid-template-columns:1fr 520px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.duo .phone{max-width:none}.duo video{aspect-ratio:4/5}
+.chat{border:var(--b);box-shadow:var(--sh);background:#e7efe2;padding:16px;font-size:14px;line-height:1.4;max-width:280px;width:100%;margin:0 auto}
+.chat.w{background:#fff}
+.chat p{background:#fff;border:2px solid var(--ink);padding:9px 11px;margin:0 0 10px}
+.chat p:last-child{margin-bottom:0}
+.chat p.me{background:#c9f2b8;margin-left:44px}
+.chat p.btnx{background:var(--cyan);text-align:center;font-weight:700}
+.chat .cap{font-family:"Space Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;opacity:.7}
+.big-take{display:grid;grid-template-columns:90px 1fr;gap:24px;align-items:start}
+.takes{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.takes .card{display:flex;flex-direction:column}
+.takes .strike{font-family:"Space Mono",monospace;font-size:14px;text-decoration:line-through;opacity:.6;margin-bottom:8px}
+.reels{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:30px}
+.reels .phone{max-width:none}
+.tbl{width:100%;border-collapse:collapse;background:#fff;border:var(--b);box-shadow:var(--sh)}
+.tbl th,.tbl td{border:2px solid var(--ink);padding:12px 14px;text-align:left;vertical-align:top;font-size:16px;line-height:1.35}
+.tbl th{background:var(--ink);color:#fff;font-size:14px}
+.tbl tr:last-child td{background:var(--yellow);font-weight:700}
+.receipt{background:#fff;border:var(--b);box-shadow:var(--sh);padding:26px;font-family:"Space Mono",monospace;font-size:15px;max-width:440px;margin:0 auto;width:100%}
+.receipt div{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:2px dashed rgba(17,17,17,.35)}
+.receipt div span:last-child{white-space:nowrap;text-align:right}
+.receipt .sum{font-weight:700;border-bottom:0;background:var(--green);border:3px solid var(--ink);padding:10px 12px;margin-top:14px}
+.proof{display:grid;grid-template-columns:1.25fr 1fr;gap:30px;align-items:start}
+.shot img{width:100%}
+.shot .src{display:block;padding:12px 4px 2px;font-weight:700}
+.range{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.range .card{padding:16px}
+.range b{display:block;font-size:26px;line-height:1.1}
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center}
+.pair .arr{font-size:44px;font-weight:700;text-align:center}
+.pair .big{font-size:40px;font-weight:700;line-height:1.1}
+.sticky .btn{box-shadow:3px 3px 0 var(--ink)}
+.legal{flex-basis:100%;opacity:.65;font-size:12.5px;line-height:1.5}
+:focus-visible{outline:4px solid var(--red);outline-offset:3px}
+@media (max-width:860px){
+  .stats,.range{grid-template-columns:1fr 1fr;gap:14px}.stats b{font-size:24px}
+  .step,.step.wide,.step:nth-child(even),.takes,.proof,.pair{grid-template-columns:1fr}
+  .step:nth-child(even) .txt{order:0}
+  .pair .arr{transform:rotate(90deg)}
+  .reels{grid-template-columns:1fr 1fr;gap:14px}.igrid span{font-size:11px;padding:18px 3px 5px 4px;gap:3px}.igrid svg{width:12px;height:12px}
+  .stamp{font-size:13px}
+  .hero .stamp:first-of-type{left:-6px!important}
+  .tbl thead{display:none}.tbl,.tbl tbody,.tbl tr,.tbl td{display:block}
+  .tbl td{border:0;padding:4px 16px}.tbl tr{border-bottom:3px solid var(--ink);padding:14px 0;display:block}
+  .tbl tr:last-child{border-bottom:0;background:var(--yellow)}
+  .tbl td:first-child{font-weight:700;font-size:19px}
+  .tbl td[data-h]:before{content:attr(data-h) ": ";font-weight:700}
+  .label{padding:12px 18px;font-size:12px}
+  section.wrap{padding-top:44px;padding-bottom:44px}section.final{padding:52px 0}
+  .btn.big{font-size:20px;padding:20px 18px}
+  .card{padding:22px}.lead{font-size:18px}.tag{font-size:14px;padding:6px 11px}.bar{font-size:11px;letter-spacing:.06em}
+  .sticky{transform:translateY(110%);transition:transform .25s}.sticky.on{transform:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="bar mono">Обучение «AI-рилсы, которые продают»</div>
+
+<!-- HERO -->
+<section class="wrap" style="padding-top:40px">
+  <div class="hero">
+    <div>
+      <span class="tag"><i></i>Ты здесь из рилса? Значит, схема работает</span>
+      <h1>Рилсы делает <span class="hl">нейросеть,</span> курс продаёт воронка</h1>
+      <p class="lead">Ты увидел мой ролик, заинтересовался и открыл эту страницу. Ровно так это и устроено. Можно без лица в кадре, без созвонов, из расходов — подписки на нейросети. Сейчас покажу всю схему, а в конце будет обучение, по которому можно собрать такую же.</p>
+      <div style="margin-top:32px"><a class="btn big" href="#scheme">Показать схему</a>
+      <div class="btn-note">Чтения минут на семь</div></div>
+    </div>
+    <div style="position:relative">
+      <div class="photo"><img src="assets/hero.jpg" alt="Ярослав Монтана"></div>
+      <div class="stamp" style="left:-18px;bottom:40px;transform:rotate(-4deg)">Ярослав Монтана<br><span style="font-weight:500">@montana_yaroslav</span></div>
+      <div class="stamp" style="right:-10px;top:-14px;background:var(--pink);transform:rotate(5deg)">3 000 000 ₽ на нейросетях</div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="card"><b>3 000 000 ₽</b><span>заработал с помощью AI</span></div>
+    <div class="card" style="background:var(--yellow)"><b>3 200</b><span>подписчиков в Instagram сейчас. Не 100 тысяч</span></div>
+    <div class="card" style="background:var(--cyan)"><b>5 300+</b><span>человек в Telegram-канале</span></div>
+    <div class="card"><b>0 ₽</b><span>на товар, аренду и склад</span></div>
+  </div>
+</section>
+
+<!-- ХАНТ 1-2: проблема -->
+<section class="wrap">
+  <div class="center"><span class="label mono">Узнаёшь себя?</span></div>
+  <div class="grid2">
+    <div class="card reveal"><ul class="check cross">
+      <li>Работаешь, а денег хватает ровно до следующей зарплаты.</li>
+      <li>Хочется уехать, но работа держит в одном городе.</li>
+      <li>Пробовал товарку или маркетплейсы: деньги ушли в товар, а прибыли нет.</li></ul></div>
+    <div class="card reveal" style="background:#ffe9ef"><ul class="check cross">
+      <li>Понимаешь, что надо вести блог, но говорить в камеру не хочется.</li>
+      <li>Смотришь чужие ролики с нейросетями и думаешь «надо бы разобраться».</li>
+      <li>Не веришь очередному блогеру, который «нашёл схему». Правильно делаешь.</li></ul></div>
+  </div>
+  <div class="dark reveal" style="margin-top:34px">
+    <p style="font-size:20px">Мне это знакомо. Магазины одежды, Wildberries, минус 2 млн, банкротство с долгами 4,5 млн и денег на пару месяцев жизни.</p>
+    <p style="margin-top:16px"><span class="mark">Поэтому мне нужно было дело без вложений, без привязки к месту и без витрины из моего лица.</span></p>
+  </div>
+</section>
+
+<!-- ХАНТ 3: сравнение решений -->
+<section class="wrap">
+  <div class="center"><span class="label y mono">Какие варианты вообще есть</span></div>
+  <h2 class="center">Почему не товарка, не фриланс и не обычный блог</h2>
+  <table class="tbl reveal" style="margin-top:26px">
+    <thead><tr><th>Вариант</th><th>Что нужно на старте</th><th>Где застревают</th></tr></thead>
+    <tbody>
+    <tr><td>Товар и маркетплейсы</td><td data-h="Старт">Деньги на закупку, склад, рекламу</td><td data-h="Застревают">Не продалось — деньги лежат в коробках. Я так потерял 2 млн</td></tr>
+    <tr><td>Фриланс и заказы</td><td data-h="Старт">Навык и портфолио</td><td data-h="Застревают">Правки, созвоны, дедлайны. Перестал работать — перестал получать</td></tr>
+    <tr><td>Обычный блог</td><td data-h="Старт">Говорить в камеру каждый день</td><td data-h="Застревают">Стесняются, выгорают, бросают на десятом ролике</td></tr>
+    <tr><td>AI-рилсы и свой инфопродукт</td><td data-h="Старт">Подписка на нейросети и ноутбук</td><td data-h="Что важно">Один раз записать продукт и собрать воронку, дальше выпускать ролики</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- СХЕМА -->
+<section class="wrap" id="scheme">
+  <div class="center"><span class="label c mono">Как это выглядит</span></div>
+  <h2 class="center">Вся схема в пяти шагах</h2>
+  <div class="steps" style="margin-top:34px">
+    <div class="step wide reveal"><div class="txt"><span class="n mono">Шаг 1</span><h3>Нейросеть делает ролик</h3><p>Ты один раз настраиваешь весь процесс и потом просто перекладываешь материалы из одного места в другое. Всё самое сложное делает нейросеть.</p></div><div class="duo"><div class="phone"><video style="object-position:50% 65%" src="assets/step1_a.mp4" poster="assets/step1_a.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><div class="phone"><video style="object-position:50% 100%" src="assets/step1_b.mp4" poster="assets/step1_b.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div></div></div>
+    <div class="step reveal"><div class="txt"><span class="n mono">Шаг 2</span><h3>Ролик выходит в Instagram</h3><p>Выкладываешь рилс, в описании призыв к действию написать кодовое слово, чтобы получить бесплатно «плюшку» или мини-урок. Человеку интересно, как это сделано, и он пишет комментарий.</p></div><div class="chat w"><div class="cap">Комментарии, пример</div><p>Урок</p><p>Нейросеть</p><p>Как это сделать?</p></div></div>
+    <div class="step reveal"><div class="txt"><span class="n mono">Шаг 3</span><h3>Бот отдаёт бесплатный урок</h3><p>По кодовому слову человек попадает в бот и получает пользу сразу: урок, где видно, как ты работаешь. Ты в этот момент можешь спать или играть в падел.</p></div><div class="chat"><div class="cap">Telegram-бот, пример</div><p class="me">Урок</p><p>Привет! Вот бесплатный урок, в котором я показываю, как создавать видео с помощью нейросетей.</p><p class="btnx">Смотреть урок</p></div></div>
+    <div class="step reveal"><div class="txt"><span class="n mono">Шаг 4</span><h3>Сначала польза, потом предложение</h3><p>Человек бесплатно получает настоящую пользу, а не пустышку, которая его разочарует: посмотрел урок, повторил, увидел результат.</p><p>И только после этого ты предлагаешь полноценно научиться создавать видео в нейросетях. За 20–30 минут бесплатного урока нереально рассказать все подробности и подводные камни. Кому понравилось, тому нужно продолжение.</p></div><div class="chat"><div class="cap">Telegram-бот, пример</div><p>Как тебе урок? Получилось повторить?</p><p class="me">Да, круто! А как делать сложнее?</p><p>В урок на 25 минут всё не поместить. Подробности и подводные камни разобрал в обучении.</p><p class="btnx">Открыть обучение</p></div></div>
+    <div class="step reveal"><div class="txt"><span class="n mono">Шаг 5</span><h3>Человек покупает твой курс</h3><p>Курс ты записал заранее: как создавать любые видео с помощью нейросетей. Продукт один, а продать его можно сколько угодно раз.</p></div><div class="chat w"><div class="cap">Что ты записал один раз</div><p>Урок 1. Инструменты</p><p>Урок 2. Картинка</p><p>Урок 3. Видео</p><p>Урок 4. Монтаж</p><p class="btnx">Доступ открыт</p></div></div>
+  </div>
+  <div class="center" style="margin-top:30px"><a class="btn js-buy" href="#">Хочу собрать такую же</a></div>
+</section>
+
+<!-- ТЕЙКИ -->
+<section class="wrap">
+  <div class="center"><span class="label p mono">Почему это проще, чем кажется</span></div>
+  <div class="takes">
+    <div class="card reveal"><div class="strike">Ломать голову над идеями</div><h3>База идей всегда под рукой</h3><p>Не нужно постоянно придумывать, какие видео создавать. Есть схема, по которой у тебя будет огромная база идей, которые залетают. Этой схемой я пользуюсь сам уже больше 6 месяцев.</p></div>
+    <div class="card reveal" style="background:var(--yellow)"><div class="strike">Разговаривать в камеру</div><h3>Лицо показывать не нужно</h3><p>Есть формат, где в кадре экран, ноутбук и результат. Ниже мой аккаунт: посмотри, сколько там роликов, в которых меня нет вообще.</p></div>
+    <div class="card reveal" style="background:var(--cyan)"><div class="strike">Вкладывать сотни тысяч</div><h3>Расход — подписка на нейросети</h3><p>Ни товара, ни аренды, ни рекламы. Месячные затраты закрываются с продажи одного инфопродукта.</p></div>
+    <div class="card reveal"><div class="strike">Созваниваться и уговаривать</div><h3>Воронка простая и понятная</h3><p>Не нужно неделями греть сторис и дожимать на звонках. Настроил бота один раз, и он каждому рассказывает одно и то же в нужном порядке.</p></div>
+  </div>
+  <h2 style="margin-top:64px">Ролики, где в кадре нет моего лица и мне не нужно говорить на камеру</h2>
+    <div class="reels">
+    <div class="phone reveal"><video src="assets/noface1.mp4" poster="assets/noface1.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><div class="phone reveal"><video src="assets/noface2.mp4" poster="assets/noface2.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><div class="phone reveal"><video src="assets/noface3.mp4" poster="assets/noface3.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><div class="phone reveal"><video src="assets/noface4.mp4" poster="assets/noface4.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+  </div>
+</section>
+
+<!-- ХАНТ 4: доказательства -->
+<section class="wrap">
+  <div class="center"><span class="label c mono">Почему мне можно верить</span></div>
+  <h2 class="center">Не верь на слово. Зайди и проверь</h2>
+  <p class="center lead" style="margin:0 auto 34px">Блогеров, которые рассказывают про схемы, хватает. Я показываю свою на открытом аккаунте, с которого ты сюда и пришёл.</p>
+  <div class="proof">
+    <div class="shot reveal"><img src="assets/ig_head.jpg" alt="Профиль montana_yaroslav, 3 238 подписчиков"><div class="igrid"><div><img src="assets/reel1.jpg" alt="Рилс, 73,1 тыс. просмотров" loading="lazy"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>73,1 тыс.</span></div><div><img src="assets/reel2.jpg" alt="Рилс, 31,6 тыс. просмотров" loading="lazy"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>31,6 тыс.</span></div><div><img src="assets/reel3.jpg" alt="Рилс, 24,1 тыс. просмотров" loading="lazy"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>24,1 тыс.</span></div><div><img src="assets/reel4.jpg" alt="Рилс, 6 985 просмотров" loading="lazy"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>6 985</span></div><div><img src="assets/reel5.jpg" alt="Рилс, 6 852 просмотров" loading="lazy"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>6 852</span></div><div><img src="assets/reel6.jpg" alt="Рилс, 6 155 просмотров" loading="lazy"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>6 155</span></div><div><img src="assets/reel7.jpg" alt="Рилс, 5 719 просмотров" loading="lazy"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>5 719</span></div><div><img src="assets/reel8.jpg" alt="Рилс, 5 388 просмотров" loading="lazy"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>5 388</span></div></div><a class="src" href="https://www.instagram.com/montana_yaroslav/" target="_blank" rel="noopener">Открыть мой Instagram →</a></div>
+    <div class="shot reveal" style="transform:rotate(1deg)"><img src="assets/tg247.jpg" alt="Пост в Telegram: бесплатный урок по Weavy"><a class="src" href="https://t.me/yaroslav_zavod/247" target="_blank" rel="noopener">Открыть пост в Telegram →</a></div>
+  </div>
+  <div class="dark reveal" style="margin-top:40px">
+    <h3 style="font-size:26px">Скажу честно: залетает далеко не каждый рилс</h3>
+    <p>Где-то может быть 100 просмотров, а где-то 70 тысяч. Но ролики собирают просмотры и комментарии, а это переходы в воронку и продажи.</p>
+    <div class="range" style="color:var(--ink)">
+      <div class="card"><b>185</b>просмотров, не зашло</div>
+      <div class="card" style="background:var(--cyan)"><b>2 434</b>обычный ролик</div>
+      <div class="card" style="background:var(--yellow)"><b>6 985</b>хороший</div>
+      <div class="card" style="background:var(--green)"><b>73,1 тыс.</b>залетел: 987 лайков, 467 комментариев</div>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:34px">
+    <div class="card reveal"><h3>Instagram приводит</h3><p>Видно, какие ролики я выкладываю, как часто и что под ними пишут. Ничего не скрыто, листай.</p><p><a href="https://www.instagram.com/montana_yaroslav/" target="_blank" rel="noopener"><b>@montana_yaroslav →</b></a></p></div>
+    <div class="card reveal" style="background:var(--yellow)"><h3>Загляни в мой Telegram</h3><p>Там весь мой путь: с чего начинал, как работаю, что получается, а что нет. Я просто веду канал и рассказываю всё про AI: нейросети, проекты, бесплатные уроки. Полистай и сам поймёшь, разбираюсь ли я в теме.</p><p><a href="https://t.me/yaroslav_zavod" target="_blank" rel="noopener"><b>@yaroslav_zavod →</b></a></p></div>
+  </div>
+</section>
+
+<!-- МАЛЕНЬКИЙ АККАУНТ -->
+<section class="wrap">
+  <div class="center"><span class="label p mono">Раскрученный аккаунт не нужен</span></div>
+  <div class="pair reveal">
+    <div class="card" style="background:#f1f1f1"><div class="mono">Было</div><div class="big">14 000</div><p>подписчиков на старом аккаунте. Его заблокировали: попал под волну блокировок.</p></div>
+    <div class="arr" aria-hidden="true">→</div>
+    <div class="card" style="background:var(--green)"><div class="mono">Сейчас</div><div class="big">3 200</div><p>на новом, с нуля. Он приносит заказы и оплаты за обучение.</p></div>
+  </div>
+  <p class="lead center" style="margin:30px auto 0">Когда аккаунт заблокировали, я завёл новый и повторил те же шаги. В первый же месяц ведения смог с него заработать 200 тысяч.</p>
+</section>
+
+<!-- ИСТОРИЯ -->
+<section class="wrap">
+  <div class="center"><span class="label y mono">Кто я</span></div>
+  <div class="story">
+    <div class="reveal">
+      <h2>От банкротства до зимы на Бали за год</h2>
+      <p>Меня зовут Ярослав. Четыре года у меня были магазины одежды в Сибири. В последний год они дали ноль, потом Wildberries забрал ещё 2 млн. Итог — банкротство.</p>
+      <p>Нейросети начал изучать на старом ноутбуке и телефоне. Сначала делал ролики на заказ и заработал на этом первые деньги. Среди клиентов были Сбер, Магнит, Газпром Трансмедиа, МедиаБаскет и Лига Ставок.</p>
+      <p>Но быстро понял: каждый заказ съедает много времени, а в сутках по-прежнему 24 часа. Масштабироваться так не получалось.</p>
+      <p>Параллельно начал вести Instagram и продавать обучение. Оно не требует от меня столько времени, сколько каждый новый заказ. Урок и рассказ об обучении человек получает в боте, а я по кайфу рассказываю свой путь в Telegram.</p>
+      <p>За этот год я переехал из Кемерово в Москву, закрыл все базовые потребности, купил нормальную технику, собрал подушку безопасности и начал путешествовать.</p>
+      <p><span class="mark">Работаю удалённо: нужен ноутбук и интернет. Эту зиму живу на Бали.</span></p>
+    </div>
+    <div class="pics reveal">
+      <figure><img src="assets/shop.jpg" alt="Магазин Montana Shop" loading="lazy"><figcaption>Мой магазин одежды</figcaption></figure>
+      <figure><img src="assets/shoes.jpg" alt="Магазин обуви" loading="lazy"><figcaption>До банкротства</figcaption></figure>
+      <figure><img src="assets/moscow.jpg" alt="Москва" loading="lazy"><figcaption>Переехал в Москву</figcaption></figure>
+      <figure><img src="assets/bali.jpg" alt="Бали" loading="lazy"><figcaption>Сейчас — Бали</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- МОСТ К ОБУЧЕНИЮ -->
+<section class="wrap" style="padding-top:0">
+  <div class="dark reveal center">
+    <h2 style="margin-bottom:18px">Я рассказал, <span class="mark" style="line-height:1.3;padding:0 10px">что</span> нужно сделать. Но не рассказал, <span class="mark" style="line-height:1.3;padding:0 10px">как</span></h2>
+    <p class="lead" style="margin:0 auto">Как раз под это у меня есть полноценное обучение. В нём подробно, по шагам рассказываю, как собрать всю эту схему и начать зарабатывать на ней первые деньги.</p>
+    <div style="margin-top:28px"><a class="btn" href="#program" style="color:var(--ink)">Посмотреть программу</a></div>
+  </div>
+</section>
+
+<!-- ХАНТ 5: программа -->
+<section class="wrap" id="program">
+  <div class="center"><span class="label p mono">Программа обучения</span></div>
+  <h2 class="center">«AI-рилсы, которые продают»</h2>
+  <p class="center lead" style="margin:0 auto 20px">От первой генерации до первых денег.</p>
+  <div class="mod reveal"><div class="n"><b>01</b>блок</div><div><h3>Создаёшь любые видео на уровне профессионала</h3><p>Начинаем с главного — навыка. Учу создавать в нейросетях видео любой сложности: персонажи, продукт, локации, свет, движение камеры, монтаж. Ты не копируешь чужие промты наугад, а понимаешь, что делаешь и почему кадр получается именно таким.</p><div class="res"><b>Результат</b>Можешь взять любую идею и довести её до сильного ролика сам.</div></div></div>
+<div class="mod reveal"><div class="n"><b>02</b>блок</div><div><h3>Формат без лица</h3><p>Разбираю форматы, на которых держится мой аккаунт: экран с процессом, ноутбук в кадре, результат и промт. Что снимать на телефон за минуту, а что отдаёт нейросеть.</p><div class="res"><b>Результат</b>Набор форматов, которые можно выпускать без разговоров в камеру.</div></div></div>
+<div class="mod reveal"><div class="n"><b>03</b>блок</div><div><h3>Instagram с пустого аккаунта</h3><p>Шапка профиля, первый кадр, хук, кодовое слово в ролике. Что я проверил на десятках рилсов: что листают, а что комментируют.</p><div class="res"><b>Результат</b>Оформленный профиль и план первых роликов.</div></div></div>
+<div class="mod reveal"><div class="n"><b>04</b>блок</div><div><h3>Твой инфопродукт</h3><p>Что продавать, как составить программу и записать уроки экраном и голосом. Без студии, света и съёмочной группы.</p><div class="res"><b>Результат</b>Готовый продукт, который не стыдно отдать человеку за деньги.</div></div></div>
+<div class="mod reveal"><div class="n"><b>05</b>блок</div><div><h3>Воронка в боте</h3><p>Кодовое слово, бот, бесплатный урок, цепочка сообщений, предложение. Показываю свою воронку изнутри и даю её структуру.</p><div class="res"><b>Результат</b>Бот, который сам отвечает, присылает урок и рассказывает про курс.</div></div></div>
+<div class="mod reveal"><div class="n"><b>06</b>блок</div><div><h3>Telegram-канал, которому верят</h3><p>Как показывать путь и работу, чтобы человек, который не купил сразу, вернулся через неделю или месяц.</p><div class="res"><b>Результат</b>Понятный план канала: о чём писать и зачем.</div></div></div>
+<div class="mod reveal"><div class="n"><b>07</b>блок</div><div><h3>Сайт и оплата</h3><p>Как собрать такую же страницу с помощью нейросети, куда вести людей с рилса и как принять оплату.</p><div class="res"><b>Результат</b>Путь от рилса до оплаты собран целиком.</div></div></div>
+</section>
+
+<!-- КОМУ -->
+<section class="wrap">
+  <div class="grid2">
+    <div class="card reveal"><h3>Тебе сюда, если:</h3><ul class="check"><li>хочешь зарабатывать удалённо и без товара;</li><li>не хочешь говорить в камеру;</li><li>готов учиться делать ролики, а не искать кнопку;</li><li>уже делаешь что-то в нейросетях, но не знаешь, как на этом заработать.</li></ul></div>
+    <div class="card reveal" style="background:#ffe9ef"><h3>Не подойдёт, если:</h3><ul class="check cross"><li>нужны гарантированные деньги через неделю;</li><li>не готов выпускать ролики регулярно;</li><li>хочешь продавать то, в чём не разобрался сам;</li><li>бросишь после первого ролика на 200 просмотров.</li></ul></div>
+  </div>
+</section>
+
+<!-- ЦЕНА -->
+<section class="wrap" id="price">
+  <div class="price-card reveal">
+    <div class="ribbon mono">AI-рилсы, которые продают</div>
+    <ul class="check" style="margin:10px 0 26px"><li>ролики в нейросетях с нуля</li><li>формат без лица в кадре</li><li>Instagram с пустого аккаунта</li><li>твой инфопродукт: от идеи до записи</li><li>воронка в боте на примере моей</li><li>Telegram-канал, которому верят</li><li>сайт и приём оплаты</li></ul>
+    <div class="center">
+      <div id="priceBlock"></div>
+      <div style="margin-top:22px"><a class="btn big js-buy" href="#">Хочу на обучение</a></div>
+      <div class="btn-note">Откроется моя личка в Telegram с готовым сообщением.<br>Отправь его, и я пришлю ссылку на оплату</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="wrap">
+  <div class="center"><span class="label y mono">Вопросы и сомнения</span></div>
+  <details><summary>Я новичок. Как я буду чему-то учить?</summary><div><p>Сначала учишься сам, потом делишься тем, что уже умеешь. Поэтому первый блок про ролики, а инфопродукт только четвёртый. Человеку, который вчера открыл нейросеть, полезен тот, кто прошёл на десять шагов дальше и помнит, где было непонятно. Продавать то, чего не умеешь, я не учу.</p></div></details>
+<details><summary>Это же «курс о том, как продавать курсы»?</summary><div><p>Понимаю, почему так звучит. Разница в том, что в основе лежит навык. Создавать видео нейросетями ты научишься в любом случае, и за эти ролики платят сами по себе: я делал их для Сбера, Магнита и Лиги Ставок. Инфопродукт — второй способ заработать на том же навыке, который не требует клиентов, правок и созвонов.</p></div></details>
+<details><summary>А если я не хочу показывать лицо вообще?</summary><div><p>Тогда не показывай. Ролики можно вести экраном, процессом и результатом. Голос за кадром помогает, но и он по желанию.</p></div></details>
+<details><summary>Мне хватит маленького аккаунта?</summary><div><p>Я сам работаю с аккаунта на 3 200 подписчиков. Продаёт не число подписчиков, а путь: рилс, кодовое слово, бот, урок, предложение.</p></div></details>
+<details><summary>Сколько времени это займёт?</summary><div><p>Основная работа в начале: освоить нейросети, записать уроки, собрать воронку. Потом остаются ролики. Сроки у всех разные и зависят от того, сколько ты делаешь руками между уроками.</p></div></details>
+<details><summary>Точно ли мне не нужны вложения?</summary><div><p>Нужны подписки: агрегатор нейросетей около 4 500 ₽ и языковая модель около 2 500 ₽ в месяц. Плюс сервис для бота по его тарифу. Товара, аренды, рекламы и техники не нужно.</p></div></details>
+<details><summary>Ты гарантируешь, что я заработаю?</summary><div><p>Нет. И тем, кто гарантирует, я бы не верил. Я показываю рабочую схему и свои цифры, а результат зависит от того, выпускаешь ли ты ролики и доводишь ли воронку до конца. Далеко не каждый мой рилс залетает, и у тебя будет так же.</p></div></details>
+<details><summary>Instagram могут заблокировать. Что тогда?</summary><div><p>Мой заблокировали на 14 000 подписчиков. Выручило то, что люди уже были в Telegram. Поэтому схема сразу уводит аудиторию в бот и канал.</p></div></details>
+<details><summary>Ниша уже занята?</summary><div><p>Роликов «смотри, что сделала нейросеть» много. Тех, кто довёл человека от ролика до понятного урока и продукта, мало. К тому же продукт можно сузить: нейросети для маркетплейсов, для риелторов, для одежды, для кафе.</p></div></details>
+<details><summary>Чем это отличается от твоего курса «AI-креатор»?</summary><div><p>«AI-креатор» про заказы: научиться делать рекламные ролики и продавать их бизнесу. Здесь другая цель: свой аккаунт, своя воронка и свой инфопродукт.</p></div></details>
+<details><summary>Как оплатить и получить доступ?</summary><div><p>Нажми любую кнопку на странице. Откроется моя личка в Telegram с готовым сообщением. Отправь его, я отвечу сам и пришлю ссылку на оплату. Обучение стоит 9 990 ₽.</p></div></details>
+
+</section>
+
+<!-- ФИНАЛ -->
+<section class="final">
+  <div class="wrap center">
+    <h2>Год назад я искал, где взять денег на следующий месяц</h2>
+    <p class="lead" style="margin:0 auto">Сейчас пишу это с Бали. Между этими точками не было везения: был навык, ролики, которые я выпускал, даже когда они не залетали, и воронка. Покажу тебе всё это по шагам.</p>
+    <div style="margin-top:34px"><a class="btn big js-buy" href="#">Написать Ярославу</a></div>
+    <div class="btn-note" style="opacity:.85">Пока сомневаешься — <a href="https://t.me/yaroslav_zavod" target="_blank" rel="noopener">почитай канал</a>, там видно, как я работаю.</div>
+  </div>
+</section>
+
+<footer>
+  <div>Ярослав Монтана · AI-креатор</div>
+  <div><a href="https://www.instagram.com/montana_yaroslav/" target="_blank" rel="noopener">Instagram*</a> · <a href="https://t.me/yaroslav_zavod" target="_blank" rel="noopener">Telegram-канал</a> · <a href="https://t.me/montana_yaroslav" target="_blank" rel="noopener">Написать мне</a></div>
+  <div class="legal">Цифры на странице — мой личный опыт, они не гарантируют такого же дохода: результат зависит от ваших действий. Просмотры рилсов по данным аккаунта за ноябрь 2026 года. *Instagram принадлежит компании Meta, признанной экстремистской и запрещённой в РФ.</div>
+</footer>
+</div>
+
+<div class="sticky"><a class="btn js-buy" href="#">Хочу на обучение · 9 990 ₽</a></div>
+
+<script>
+/* ЦЕНА: впиши сюда, например '14 990 ₽'. Пусто — страница предлагает узнать цену в личке. */
+const PRICE='9 990 ₽';
+document.getElementById('priceBlock').innerHTML=PRICE
+  ?'<div class="mono" style="opacity:.7">Стоимость</div><div class="price">'+PRICE+'</div>'
+  :'<h3 style="font-size:26px">Цена и условия — в личке</h3><p>Напиши, расскажу, что внутри, сколько стоит и подойдёт ли тебе.</p>';
+const DM='https://t.me/montana_yaroslav?text='+encodeURIComponent('Привет! Хочу на обучение как зарабатывать на своем инфопродукте. Скинь ссылку на оплату.');
+document.querySelectorAll('.js-buy').forEach(a=>{a.href=DM;a.target='_blank';a.rel='noopener'});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* нижняя кнопка появляется после первого экрана */
+const st=document.querySelector(".sticky");const ss=()=>st.classList.toggle("on",scrollY>700);addEventListener("scroll",ss,{passive:true});ss();
+/* видео играют только в кадре: страница не грузит всё сразу */
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const vo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!calm)e.target.play().catch(()=>{});else e.target.pause()}),{threshold:.2});
+document.querySelectorAll('video').forEach(v=>vo.observe(v));
+</script>
+</body>
+</html>
